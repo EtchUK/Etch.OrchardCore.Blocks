@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0-beta</Version>
+    <PackageId>Etch.OrchardCore.EditorJS</PackageId>
+    <Title>Editor.js</Title>
+    <Authors>Etch UK</Authors>
+    <Description>Orchard Core module providing WYSIWYG editor via Editor.js.</Description>
+    <PackageTags>orchardcore;etchuk</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OrchardCore.ContentManagement" Version="1.0.0-beta3-71077" />
+    <PackageReference Include="OrchardCore.ContentManagement.Display" Version="1.0.0-beta3-71077" />
+    <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0-beta3-71077" />
+    <PackageReference Include="OrchardCore.ResourceManagement" Version="1.0.0-beta3-71077" />
+    <PackageReference Include="OrchardCore.Module.Targets" Version="1.0.0-beta3-71077" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+  </ItemGroup>
+
+  <Target Name="BuildStaticAssetsForRelease" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="npm install" />
+    <Exec Command="npm run build" />
+  </Target>
+
+</Project>
