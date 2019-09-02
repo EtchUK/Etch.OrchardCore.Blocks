@@ -2,7 +2,6 @@
 using Etch.OrchardCore.EditorJS.Parsers.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Etch.OrchardCore.EditorJS.Parsers
@@ -13,6 +12,7 @@ namespace Etch.OrchardCore.EditorJS.Parsers
 
         private IDictionary<string, IBlockParser> _parsers = new Dictionary<string, IBlockParser>
         {
+            { "header", new HeadingBlockParser() },
             { "paragraph", new ParagraphBlockParser() }
         };
 
