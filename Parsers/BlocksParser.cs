@@ -13,6 +13,7 @@ namespace Etch.OrchardCore.EditorJS.Parsers
         private IDictionary<string, IBlockParser> _parsers = new Dictionary<string, IBlockParser>
         {
             { "delimiter", new DelimiterBlockParser() },
+            { "embed", new EmbedBlockParser() },
             { "header", new HeadingBlockParser() },
             { "list", new ListBlockParser() },
             { "paragraph", new ParagraphBlockParser() },

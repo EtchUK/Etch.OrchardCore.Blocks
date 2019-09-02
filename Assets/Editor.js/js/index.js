@@ -29,7 +29,18 @@ window.initializeEditorJS = (id, hiddenFieldId) => {
 
         tools: {
             delimiter: Delimiter,
-            embed: Embed,
+            embed: {
+                class: Embed,
+                config: {
+                    services: {
+                        'twitch-channel': true,
+                        'twitch-video': true,
+                        vimeo: true,
+                        youtube: true,
+                    },
+                },
+                inlineToolbar: true,
+            },
             header: {
                 class: Header,
                 inlineToolbar: true,
