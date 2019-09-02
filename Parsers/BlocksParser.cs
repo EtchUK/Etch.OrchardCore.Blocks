@@ -14,7 +14,8 @@ namespace Etch.OrchardCore.EditorJS.Parsers
         {
             { "header", new HeadingBlockParser() },
             { "list", new ListBlockParser() },
-            { "paragraph", new ParagraphBlockParser() }
+            { "paragraph", new ParagraphBlockParser() },
+            { "quote", new QuoteBlockParser() }
         };
 
         #endregion
