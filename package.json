@@ -20,6 +20,7 @@
     "devDependencies": {
         "@babel/core": "^7.4.0",
         "@babel/preset-env": "^7.4.2",
+        "@editorjs/delimiter": "^1.1.0",
         "@editorjs/editorjs": "^2.15.0",
         "@editorjs/embed": "^2.2.1",
         "@editorjs/header": "^2.3.0",

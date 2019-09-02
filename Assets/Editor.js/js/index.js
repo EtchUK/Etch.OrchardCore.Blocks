@@ -1,3 +1,4 @@
+import Delimiter from '@editorjs/delimiter';
 import Embed from '@editorjs/embed';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
@@ -27,6 +28,7 @@ window.initializeEditorJS = (id, hiddenFieldId) => {
         placeholder: 'Enter your content here...',
 
         tools: {
+            delimiter: Delimiter,
             embed: Embed,
             header: {
                 class: Header,
