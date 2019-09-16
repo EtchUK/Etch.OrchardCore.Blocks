@@ -4,10 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.1.0-beta</Version>
-    <PackageId>Etch.OrchardCore.EditorJS</PackageId>
+    <PackageId>Etch.OrchardCore.Blocks</PackageId>
     <Title>Editor.js</Title>
     <Authors>Etch UK</Authors>
-    <Description>Orchard Core module providing WYSIWYG editor via Editor.js.</Description>
+    <Description>Orchard Core module enables content to be defined with a block based editor.</Description>
     <PackageTags>orchardcore;etchuk</PackageTags>
   </PropertyGroup>
 

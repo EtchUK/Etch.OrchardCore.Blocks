@@ -1,12 +1,12 @@
-﻿using Etch.OrchardCore.EditorJS.Drivers;
-using Etch.OrchardCore.EditorJS.Fields;
-using Etch.OrchardCore.EditorJS.Parsers;
+﻿using Etch.OrchardCore.Blocks.Drivers;
+using Etch.OrchardCore.Blocks.Fields;
+using Etch.OrchardCore.Blocks.Parsers;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.Modules;
 
-namespace Etch.OrchardCore.EditorJS
+namespace Etch.OrchardCore.Blocks
 {
     public class Startup : StartupBase
     {
@@ -17,8 +17,8 @@ namespace Etch.OrchardCore.EditorJS
 
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ContentField, WYSIWYGField>();
-            services.AddScoped<IContentFieldDisplayDriver, WYSIWYGFieldDriver>();
+            services.AddSingleton<ContentField, BlockField>();
+            services.AddScoped<IContentFieldDisplayDriver, BlockFieldDriver>();
 
             services.AddScoped<IBlocksParser, BlocksParser>();
         }

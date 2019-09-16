@@ -1,5 +1,5 @@
 {
-    "name": "etch.orchardcore.editorjs",
+    "name": "etch.orchardcore.blocks",
     "version": "0.1.0",
     "description": "Orchard Core module providing WYSIWYG editor via Editor.js.",
     "scripts": {
@@ -9,14 +9,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/etchuk/Etch.OrchardCore.EditorJS.git"
+        "url": "git+https://github.com/etchuk/Etch.OrchardCore.Blocks.git"
     },
     "author": "Etch Ltd.",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/etchuk/Etch.OrchardCore.EditorJS/issues"
+        "url": "https://github.com/etchuk/Etch.OrchardCore.Blocks/issues"
     },
-    "homepage": "https://github.com/etchuk/Etch.OrchardCore.EditorJS#readme",
+    "homepage": "https://github.com/etchuk/Etch.OrchardCore.Blocks#readme",
     "devDependencies": {
         "@babel/core": "^7.4.0",
         "@babel/preset-env": "^7.4.2",

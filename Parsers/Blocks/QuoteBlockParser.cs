@@ -1,7 +1,7 @@
-﻿using Etch.OrchardCore.EditorJS.Parsers.Models;
+﻿using Etch.OrchardCore.Blocks.Parsers.Models;
 using System;
 
-namespace Etch.OrchardCore.EditorJS.Parsers.Blocks
+namespace Etch.OrchardCore.Blocks.Parsers.Blocks
 {
     public class QuoteBlockParser : IBlockParser
     {

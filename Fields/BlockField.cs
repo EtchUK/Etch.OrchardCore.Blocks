@@ -1,8 +1,8 @@
 ﻿using OrchardCore.ContentManagement;
 
-namespace Etch.OrchardCore.EditorJS.Fields
+namespace Etch.OrchardCore.Blocks.Fields
 {
-    public class WYSIWYGField : ContentField
+    public class BlockField : ContentField
     {
         public string Data { get; set; }
 

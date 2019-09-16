@@ -1,15 +1,15 @@
-﻿using Etch.OrchardCore.EditorJS.Fields;
-using Etch.OrchardCore.EditorJS.Parsers;
-using Etch.OrchardCore.EditorJS.ViewModels;
+﻿using Etch.OrchardCore.Blocks.Fields;
+using Etch.OrchardCore.Blocks.Parsers;
+using Etch.OrchardCore.Blocks.ViewModels;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.ContentManagement.Display.Models;
 using OrchardCore.DisplayManagement.ModelBinding;
 using OrchardCore.DisplayManagement.Views;
 using System.Threading.Tasks;
 
-namespace Etch.OrchardCore.EditorJS.Drivers
+namespace Etch.OrchardCore.Blocks.Drivers
 {
-    public class WYSIWYGFieldDriver : ContentFieldDisplayDriver<WYSIWYGField>
+    public class BlockFieldDriver : ContentFieldDisplayDriver<BlockField>
     {
         #region Dependencies
 
@@ -19,16 +19,16 @@ namespace Etch.OrchardCore.EditorJS.Drivers
 
         #region Constructor
 
-        public WYSIWYGFieldDriver(IBlocksParser blocksParser)
+        public BlockFieldDriver(IBlocksParser blocksParser)
         {
             _blocksParser = blocksParser;
         }
 
         #endregion
 
-        public override IDisplayResult Display(WYSIWYGField field, BuildFieldDisplayContext context)
+        public override IDisplayResult Display(BlockField field, BuildFieldDisplayContext context)
         {
-            return Initialize<DisplayWYSIWYGFieldViewModel>(GetDisplayShapeType(context), model =>
+            return Initialize<DisplayBlockFieldViewModel>(GetDisplayShapeType(context), model =>
             {
                 model.Field = field;
                 model.Part = context.ContentPart;
@@ -40,9 +40,9 @@ namespace Etch.OrchardCore.EditorJS.Drivers
             .Location("DetailAdmin", "");
         }
 
-        public override IDisplayResult Edit(WYSIWYGField field, BuildFieldEditorContext context)
+        public override IDisplayResult Edit(BlockField field, BuildFieldEditorContext context)
         {
-            return Initialize<EditWYSIWYGFieldViewModel>(GetEditorShapeType(context), model =>
+            return Initialize<EditBlockFieldViewModel>(GetEditorShapeType(context), model =>
             {
                 model.Field = field;
                 model.Part = context.ContentPart;
@@ -51,7 +51,7 @@ namespace Etch.OrchardCore.EditorJS.Drivers
             });
         }
 
-        public override async Task<IDisplayResult> UpdateAsync(WYSIWYGField field, IUpdateModel updater, UpdateFieldEditorContext context)
+        public override async Task<IDisplayResult> UpdateAsync(BlockField field, IUpdateModel updater, UpdateFieldEditorContext context)
         {
             if (await updater.TryUpdateModelAsync(field, Prefix, f => f.Data))
             {

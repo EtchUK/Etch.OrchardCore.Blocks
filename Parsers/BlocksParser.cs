@@ -1,10 +1,10 @@
-﻿using Etch.OrchardCore.EditorJS.Parsers.Blocks;
-using Etch.OrchardCore.EditorJS.Parsers.Models;
+﻿using Etch.OrchardCore.Blocks.Parsers.Blocks;
+using Etch.OrchardCore.Blocks.Parsers.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace Etch.OrchardCore.EditorJS.Parsers
+namespace Etch.OrchardCore.Blocks.Parsers
 {
     public class BlocksParser : IBlocksParser
     {
