@@ -1,15 +1,28 @@
-﻿@model Etch.OrchardCore.Blocks.ViewModels.EditBlockFieldViewModel
+﻿@using OrchardCore.ContentManagement.Metadata.Models
 
-@using OrchardCore.ContentManagement.Metadata.Models
+@model Etch.OrchardCore.Blocks.ViewModels.EditBlockFieldViewModel
 
-<script asp-src="~/Etch.OrchardCore.Blocks/Scripts/editorjs/admin.js" asp-name="editor.js" at="Foot"></script>
+@inject OrchardCore.Environment.Shell.IShellFeaturesManager ShellFeaturesManager
 
-<script at="Foot">
-    initializeEditorJS('@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)');
-</script>
+@{
+    var isEditorJSEnabled = (await ShellFeaturesManager.GetEnabledFeaturesAsync()).Any(x => x.Id == "Etch.OrchardCore.Blocks.EditorJS");
+}
 
-<fieldset class="form-group">
-    <h5>@Model.PartFieldDefinition.DisplayName()</h5>
-    <div id="@Html.IdFor(m => m)"></div>
-    @Html.HiddenFor(m => m.Data)
-</fieldset>
+@if (isEditorJSEnabled)
+{
+    <script asp-src="~/Etch.OrchardCore.Blocks/Scripts/editorjs/admin.js" asp-name="editor.js" at="Foot"></script>
+
+    <script at="Foot">
+        initializeEditorJS('@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)');
+    </script>
+
+    <fieldset class="form-group">
+        <h5>@Model.PartFieldDefinition.DisplayName()</h5>
+        <div id="@Html.IdFor(m => m)"></div>
+        @Html.HiddenFor(m => m.Data)
+    </fieldset>
+}
+else
+{
+    <div class="alert alert-warning"><a asp-route-action="Features" asp-route-controller="Admin" asp-area="OrchardCore.Features">@T["Please enable Editor.js feature in order to use editor."]</a></div>
+}
