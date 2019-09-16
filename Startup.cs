@@ -20,7 +20,7 @@ namespace Etch.OrchardCore.Blocks
             services.AddSingleton<ContentField, BlockField>();
             services.AddScoped<IContentFieldDisplayDriver, BlockFieldDriver>();
 
-            services.AddScoped<IBlocksParser, BlocksParser>();
+            services.AddScoped<IBlocksParser, DefaultBlocksParser>();
         }
     }
 }

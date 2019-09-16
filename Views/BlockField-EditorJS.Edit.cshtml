@@ -1,0 +1,15 @@
+﻿@model Etch.OrchardCore.Blocks.ViewModels.EditBlockFieldViewModel
+
+@using OrchardCore.ContentManagement.Metadata.Models
+
+<script asp-src="~/Etch.OrchardCore.Blocks/Scripts/editorjs/admin.js" asp-name="editor.js" at="Foot"></script>
+
+<script at="Foot">
+    initializeEditorJS('@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)');
+</script>
+
+<fieldset class="form-group">
+    <h5>@Model.PartFieldDefinition.DisplayName()</h5>
+    <div id="@Html.IdFor(m => m)"></div>
+    @Html.HiddenFor(m => m.Data)
+</fieldset>

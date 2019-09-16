@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Etch.OrchardCore.Blocks.Parsers.Models
+namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Models
 {
     public class Block
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using Etch.OrchardCore.Blocks.Parsers.Models;
+using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
 
-namespace Etch.OrchardCore.Blocks.Parsers.Blocks
+namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
 {
     public class EmbedBlockParser : IBlockParser
     {

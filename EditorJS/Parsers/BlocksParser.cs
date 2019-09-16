@@ -1,10 +1,11 @@
-﻿using Etch.OrchardCore.Blocks.Parsers.Blocks;
-using Etch.OrchardCore.Blocks.Parsers.Models;
+﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks;
+using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
+using Etch.OrchardCore.Blocks.Parsers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace Etch.OrchardCore.Blocks.Parsers
+namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 {
     public class BlocksParser : IBlocksParser
     {
@@ -44,10 +45,5 @@ namespace Etch.OrchardCore.Blocks.Parsers
         }
 
         #endregion
-    }
-
-    public interface IBlocksParser
-    {
-        string ToHtml(string data);
     }
 }

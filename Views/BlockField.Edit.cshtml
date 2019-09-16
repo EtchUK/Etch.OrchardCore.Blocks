@@ -2,14 +2,7 @@
 
 @using OrchardCore.ContentManagement.Metadata.Models
 
-<script asp-src="~/Etch.OrchardCore.Blocks/Scripts/editorjs/admin.js" asp-name="editor.js" at="Foot"></script>
-
-<script at="Foot">
-    initializeEditorJS('@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)');
-</script>
-
 <fieldset class="form-group">
-    <h5>@Model.PartFieldDefinition.DisplayName()</h5>
-    <div id="@Html.IdFor(m => m)"></div>
-    @Html.HiddenFor(m => m.Data)
+    <h5><label asp-for="Data">@Model.PartFieldDefinition.DisplayName()</label></h5>
+    <textarea asp-for="Data" rows="5" class="form-control content-preview-text"></textarea>
 </fieldset>
