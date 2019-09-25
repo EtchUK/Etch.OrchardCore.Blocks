@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
+using Etch.OrchardCore.Blocks.ViewModels.Blocks;
+using OrchardCore.DisplayManagement;
 
 namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
 {
     public class EmbedBlockParser : IBlockParser
     {
-        public string Render(Block block)
+        public async Task<dynamic> RenderAsync(IShapeFactory shapeFactory, Block block)
         {
-            var html = $"<div class=\"embed embed--{block.Data["service"]}\">";
-            html += $"{Environment.NewLine}\t<iframe src=\"{block.Data["embed"]}\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
-            html += $"{Environment.NewLine}</div>";
-
-            if (block.Data.ContainsKey("caption") && !string.IsNullOrWhiteSpace((string)block.Data["caption"]))
-            {
-                html += $"{Environment.NewLine}\t<p>{block.Data["caption"]}</p>";
-            }
-
-            return html;
+            return await shapeFactory.New.Block__Embed(
+                new EmbedBlockViewModel
+                {
+                    Caption = block.Get("caption"),
+                    Service = block.Get("service"),
+                    SourceUrl = block.Get("embed")
+                }
+            );
         }
     }
 }

@@ -1,24 +1,22 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
-using System;
+using Etch.OrchardCore.Blocks.ViewModels.Blocks;
+using OrchardCore.DisplayManagement;
+using System.Threading.Tasks;
 
 namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
 {
     public class QuoteBlockParser : IBlockParser
     {
-        public string Render(Block block)
+        public async Task<dynamic> RenderAsync(IShapeFactory shapeFactory, Block block)
         {
-            var cssClasses = (block.Data.ContainsKey("alignment") && block.Data["alignment"] as string == "center") ? "blockquote blockquote--centered" : "blockquote";
-            var html = $"<blockquote class=\"{cssClasses}\">";
-
-            html += $"{Environment.NewLine}\t<p>{block.Data["text"]}</p>";
-
-            if (block.Data.ContainsKey("caption") && !string.IsNullOrWhiteSpace((string)block.Data["caption"]))
-            {
-                html += $"{Environment.NewLine}\t<footer>{block.Data["caption"]}</footer>";
-            }
-
-            html += $"{Environment.NewLine}</blockquote>";
-            return html;
+            return await shapeFactory.New.Block__Quote(
+                new QuoteBlockViewModel
+                {
+                    Alignment = block.Get("alignment"),
+                    Caption = block.Get("caption"),
+                    Text = block.Get("text")
+                }
+            );
         }
     }
 }

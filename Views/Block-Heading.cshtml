@@ -1,0 +1,7 @@
+﻿@{
+    TagBuilder tag = Tag(Model, $"h{Model.Level.ToString()}");
+}
+
+@tag.RenderStartTag()
+    @Model.Text
+@tag.RenderEndTag()

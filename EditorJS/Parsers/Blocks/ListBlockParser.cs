@@ -1,25 +1,22 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
+using Etch.OrchardCore.Blocks.ViewModels.Blocks;
 using Newtonsoft.Json.Linq;
-using System;
+using OrchardCore.DisplayManagement;
+using System.Threading.Tasks;
 
 namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
 {
     public class ListBlockParser : IBlockParser
     {
-        public string Render(Block block)
+        public async Task<dynamic> RenderAsync(IShapeFactory shapeFactory, Block block)
         {
-            var tag = block.Data["style"].ToString() == "unordered" ? "ul" : "ol";
-            var items = (block.Data["items"] as JArray).ToObject<string[]>();
-
-            var html = $"<{tag}>";
-
-            foreach (var item in items)
-            {
-                html += $"{Environment.NewLine}\t<li>{item}</li>";
-            }
-
-            html += $"{Environment.NewLine}</{tag}>";
-            return html;
+            return await shapeFactory.New.Block__List(
+                new ListBlockViewModel
+                {
+                    ListItems = block.Has("items") ? (block.Data["items"] as JArray).ToObject<string[]>() : new string[0],
+                    Style = block.Get("style")
+                }
+            );
         }
     }
 }

@@ -2,6 +2,9 @@
 
 <section class="section">
     <div class="section__content">
-        @Html.Raw(Model.Html)
+        @foreach (var block in Model.Blocks)
+        {
+            @await DisplayAsync(block)
+        }
     </div>
 </section>

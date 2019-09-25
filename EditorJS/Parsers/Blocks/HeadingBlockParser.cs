@@ -1,12 +1,21 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
+using Etch.OrchardCore.Blocks.ViewModels.Blocks;
+using OrchardCore.DisplayManagement;
+using System.Threading.Tasks;
 
 namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
 {
     public class HeadingBlockParser : IBlockParser
     {
-        public string Render(Block block)
+        public async Task<dynamic> RenderAsync(IShapeFactory shapeFactory, Block block)
         {
-            return $"<h{block.Data["level"]}>{block.Data["text"]}</h{block.Data["level"]}>";
+            return await shapeFactory.New.Block__Heading(
+                new HeadingBlockViewModel
+                {
+                    Level = block.Has("level") ? int.Parse(block.Get("level")) : 1,
+                    Text = block.Get("text")
+                }
+            );
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks;
 using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
 using Etch.OrchardCore.Blocks.Parsers;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using OrchardCore.DisplayManagement;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 {
@@ -25,24 +28,46 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
         #endregion
 
+        #region Dependencies
+
+        private readonly ILogger<BlocksParser> _logger;
+        private readonly IShapeFactory _shapeFactory;
+
+        #endregion
+
+        #region Constructor
+
+        public BlocksParser(ILogger<BlocksParser> logger, IShapeFactory shapeFactory)
+        {
+            _logger = logger;
+            _shapeFactory = shapeFactory;
+        }
+
+        #endregion
+
         #region Implementation
 
-        public string ToHtml(string data)
+        public async Task<IList<dynamic>> RenderAsync(string data)
         {
-            var html = string.Empty;
-            var blocks = JsonConvert.DeserializeObject<EditorBlocks>(data);
+            var shapes = new List<dynamic>();
 
-            foreach (var block in blocks.Blocks)
+            foreach (var block in JsonConvert.DeserializeObject<EditorBlocks>(data).Blocks)
             {
                 if (!_parsers.ContainsKey(block.Type))
                 {
                     continue;
                 }
 
-                html += $"{_parsers[block.Type].Render(block)}{Environment.NewLine}{Environment.NewLine}";
+                try
+                {
+                    shapes.Add(await _parsers[block.Type].RenderAsync(_shapeFactory, block));
+                } catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Failed to render {block.Type} block.");
+                }
             }
 
-            return html;
+            return shapes;
         }
 
         #endregion

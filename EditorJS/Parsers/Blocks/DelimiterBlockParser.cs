@@ -1,12 +1,14 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
+using OrchardCore.DisplayManagement;
+using System.Threading.Tasks;
 
 namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
 {
     public class DelimiterBlockParser : IBlockParser
     {
-        public string Render(Block block)
+        public async Task<dynamic> RenderAsync(IShapeFactory shapeFactory, Block block)
         {
-            return "<hr />";
+            return await shapeFactory.New.Block__Delimiter();
         }
     }
 }

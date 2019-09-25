@@ -26,18 +26,24 @@ namespace Etch.OrchardCore.Blocks.Drivers
 
         #endregion
 
-        public override IDisplayResult Display(BlockField field, BuildFieldDisplayContext context)
+        public override async Task<IDisplayResult> DisplayAsync(BlockField field, BuildFieldDisplayContext context)
         {
+            if (context.DisplayType != "Detail")
+            {
+                return null;
+            }
+
+            var blocks = await _blocksParser.RenderAsync(field.Data);
+
             return Initialize<DisplayBlockFieldViewModel>(GetDisplayShapeType(context), model =>
             {
                 model.Field = field;
                 model.Part = context.ContentPart;
                 model.PartFieldDefinition = context.PartFieldDefinition;
                 model.Html = field.Html;
+                model.Blocks = blocks;
             })
-            .Location("Content")
-            .Location("SummaryAdmin", "")
-            .Location("DetailAdmin", "");
+            .Location("Content");
         }
 
         public override IDisplayResult Edit(BlockField field, BuildFieldEditorContext context)
@@ -53,10 +59,7 @@ namespace Etch.OrchardCore.Blocks.Drivers
 
         public override async Task<IDisplayResult> UpdateAsync(BlockField field, IUpdateModel updater, UpdateFieldEditorContext context)
         {
-            if (await updater.TryUpdateModelAsync(field, Prefix, f => f.Data))
-            {
-                field.Html = _blocksParser.ToHtml(field.Data);
-            }
+            await updater.TryUpdateModelAsync(field, Prefix, f => f.Data);
 
             return Edit(field, context);
         }

@@ -1,7 +1,10 @@
-﻿namespace Etch.OrchardCore.Blocks.Parsers
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Etch.OrchardCore.Blocks.Parsers
 {
     public interface IBlocksParser
     {
-        string ToHtml(string data);
+        Task<IList<dynamic>> RenderAsync(string data);
     }
 }

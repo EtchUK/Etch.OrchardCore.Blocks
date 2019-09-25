@@ -10,5 +10,15 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Models
 
         [JsonProperty("data")]
         public IDictionary<string, object> Data { get; set; }
+
+        public string Get(string property)
+        {
+            return Data[property]?.ToString() ?? string.Empty;
+        }
+
+        public bool Has(string property)
+        {
+            return Data.ContainsKey(property);
+        }
     }
 }

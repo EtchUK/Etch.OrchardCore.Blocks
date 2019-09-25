@@ -1,6 +1,7 @@
 ﻿using Etch.OrchardCore.Blocks.Fields;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Metadata.Models;
+using System.Collections.Generic;
 
 namespace Etch.OrchardCore.Blocks.ViewModels
 {
@@ -11,5 +12,7 @@ namespace Etch.OrchardCore.Blocks.ViewModels
         public ContentPartFieldDefinition PartFieldDefinition { get; set; }
 
         public string Html { get; set; }
+
+        public IList<dynamic> Blocks { get; set; }
     }
 }

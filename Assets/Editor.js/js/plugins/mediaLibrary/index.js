@@ -22,7 +22,6 @@ export default class MediaLibraryTool {
         this.api = api;
         this.config = config || {};
 
-        this._data = { media: data.media || [] };
         this.data = data;
 
         this.modalBodyElement = document.getElementById(
@@ -35,24 +34,23 @@ export default class MediaLibraryTool {
         this.wrapper.classList.add('cdx-block');
         this.wrapper.classList.add('media-library-tool');
 
-        if (!this.data.media) {
+        if (!this.data.url) {
             this._openMediaLibrary();
             return this.wrapper;
         }
 
-        this._renderItems();
+        this._render(this.data);
         return this.wrapper;
     }
 
-    save() {
-        const $captions = this.wrapper.querySelectorAll(
+    save(blockContent) {
+        const $caption = blockContent.querySelector(
             '.media-library-item__caption'
         );
-        for (var i = 0; i < this._data.media.length; i++) {
-            this._data.media[i].caption = $captions[i].innerHTML;
-        }
 
-        return this._data;
+        this.data.caption = $caption.innerHTML;
+
+        return this.data;
     }
 
     /**
@@ -74,7 +72,7 @@ export default class MediaLibraryTool {
             .off('click')
             .on('click', async function() {
                 if (window.mediaApp.selectedMedias.length) {
-                    self._setMediaItems(window.mediaApp.selectedMedias);
+                    self._setMedia(window.mediaApp.selectedMedias[0]);
                 }
 
                 window.mediaApp.selectedMedias = [];
@@ -84,7 +82,7 @@ export default class MediaLibraryTool {
             });
     }
 
-    _renderMediaItem(media) {
+    _render(media) {
         const item = document.createElement('div');
         item.classList.add('media-library-item');
 
@@ -108,29 +106,18 @@ export default class MediaLibraryTool {
 
         this.wrapper.appendChild(item);
     }
-
-    _renderItems() {
-        this.data.media.forEach(media => {
-            this._renderMediaItem(media);
-        });
-    }
-
     /**
-     * Updates block with selected media items.
-     * @param {*} mediaItems
+     * Updates block with selected media item.
      */
-    _setMediaItems(mediaItems) {
+    _setMedia(media) {
         this.wrapper.innerHTML = '';
 
-        mediaItems.forEach(media => {
-            const item = {
-                caption: '',
-                mediaPath: media.mediaPath,
-                url: media.url,
-            };
+        this.data = {
+            caption: '',
+            mediaPath: media.mediaPath,
+            url: media.url,
+        };
 
-            this._data.media.push(item);
-            this._renderMediaItem(item);
-        });
+        this._render(this.data);
     }
 }
