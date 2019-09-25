@@ -14,7 +14,15 @@ module.exports = {
                     loader: 'babel-loader',
                 },
             },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
         ],
+    },
+    externals: {
+        bootstrap: 'bootstrap',
+        jquery: 'jQuery',
     },
     output: {
         filename: '[name]/admin.js',

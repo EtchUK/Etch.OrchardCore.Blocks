@@ -5,9 +5,10 @@ import List from '@editorjs/list';
 import Paragraph from '@editorjs/paragraph';
 import Raw from '@editorjs/raw';
 import Quote from '@editorjs/quote';
-import SimpleImage from '@editorjs/simple-image';
 
 import EditorJS from '@editorjs/editorjs';
+
+import MediaLibrary from './plugins/mediaLibrary';
 
 window.initializeEditorJS = (id, hiddenFieldId) => {
     const $hiddenField = document.getElementById(hiddenFieldId);
@@ -45,7 +46,12 @@ window.initializeEditorJS = (id, hiddenFieldId) => {
                 class: Header,
                 inlineToolbar: true,
             },
-            image: SimpleImage,
+            image: {
+                class: MediaLibrary,
+                config: {
+                    id,
+                },
+            },
             list: {
                 class: List,
                 inlineToolbar: true,

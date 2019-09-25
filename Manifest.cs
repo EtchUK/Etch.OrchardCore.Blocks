@@ -20,6 +20,6 @@ using OrchardCore.Modules.Manifest;
     Id = "Etch.OrchardCore.Blocks.EditorJS",
     Name = "Editor.js",
     Description = "Makes Editor.js available as an editor for blocks.",
-    Dependencies = new string [] { "Etch.OrchardCore.Blocks" },
+    Dependencies = new string [] { "Etch.OrchardCore.Blocks", "OrchardCore.Media" },
     Category = "Content"
 )]
