@@ -29,12 +29,12 @@ namespace Etch.OrchardCore.Blocks
             TemplateContext.GlobalMemberAccessStrategy.Register<RawBlockViewModel>();
         }
 
-        public override void Configure(IApplicationBuilder builder, IRouteBuilder routes, IServiceProvider serviceProvider)
+        public override void Configure(IApplicationBuilder builder, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
         {
-            routes.MapAreaRoute(
+            routes.MapAreaControllerRoute(
                 name: "ContentSearch",
                 areaName: "Etch.OrchardCore.Blocks",
-                template: "Blocks/SearchContentItems",
+                pattern: "Blocks/SearchContentItems",
                 defaults: new { controller = "LinkContentAdmin", action = "SearchContentItems" }
             );
         }

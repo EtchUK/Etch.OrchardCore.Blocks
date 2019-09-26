@@ -10,18 +10,18 @@ namespace Etch.OrchardCore.Blocks.Settings
     {
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<BlockFieldSettings>("BlockFieldSettings_Edit", model => partFieldDefinition.Settings.Populate(model))
+            return Initialize<BlockFieldSettings>("BlockFieldSettings_Edit", model => partFieldDefinition.PopulateSettings(model))
                 .Location("Content");
         }
 
         public override async Task<IDisplayResult> UpdateAsync(ContentPartFieldDefinition partFieldDefinition, UpdatePartFieldEditorContext context)
         {
-            var model = new BlockFieldSettings();
+            var settings = new BlockFieldSettings();
 
-            await context.Updater.TryUpdateModelAsync(model, Prefix);
-
-            context.Builder.MergeSettings(model);
-            context.Builder.WithSetting(nameof(BlockFieldSettings.LinkableContentTypes), model.LinkableContentTypes);
+            if (await context.Updater.TryUpdateModelAsync(settings, Prefix))
+            {
+                context.Builder.WithSettings(settings);
+            }
 
             return Edit(partFieldDefinition);
         }
