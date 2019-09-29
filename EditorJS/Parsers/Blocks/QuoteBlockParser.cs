@@ -1,15 +1,14 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
 using Etch.OrchardCore.Blocks.ViewModels.Blocks;
-using OrchardCore.DisplayManagement;
 using System.Threading.Tasks;
 
 namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
 {
     public class QuoteBlockParser : IBlockParser
     {
-        public async Task<dynamic> RenderAsync(IShapeFactory shapeFactory, Block block)
+        public async Task<dynamic> RenderAsync(BlockParserContext context, Block block)
         {
-            return await shapeFactory.New.Block__Quote(
+            return await context.ShapeFactory.New.Block__Quote(
                 new QuoteBlockViewModel
                 {
                     Alignment = block.Get("alignment"),

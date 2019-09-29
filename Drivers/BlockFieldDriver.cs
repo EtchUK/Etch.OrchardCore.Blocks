@@ -33,7 +33,7 @@ namespace Etch.OrchardCore.Blocks.Drivers
                 return null;
             }
 
-            var blocks = await _blocksParser.RenderAsync(field.Data);
+            var blocks = await _blocksParser.RenderAsync(field);
 
             return Initialize<DisplayBlockFieldViewModel>(GetDisplayShapeType(context), model =>
             {

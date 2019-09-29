@@ -1,9 +1,11 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks;
 using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
+using Etch.OrchardCore.Blocks.Fields;
 using Etch.OrchardCore.Blocks.Parsers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OrchardCore.DisplayManagement;
+using OrchardCore.Liquid;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,6 +32,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
         #region Dependencies
 
+        private readonly ILiquidTemplateManager _liquidTemplateManager;
         private readonly ILogger<BlocksParser> _logger;
         private readonly IShapeFactory _shapeFactory;
 
@@ -37,8 +40,9 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
         #region Constructor
 
-        public BlocksParser(ILogger<BlocksParser> logger, IShapeFactory shapeFactory)
+        public BlocksParser(ILiquidTemplateManager liquidTemplateManager, ILogger<BlocksParser> logger, IShapeFactory shapeFactory)
         {
+            _liquidTemplateManager = liquidTemplateManager;
             _logger = logger;
             _shapeFactory = shapeFactory;
         }
@@ -47,11 +51,18 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
         #region Implementation
 
-        public async Task<IList<dynamic>> RenderAsync(string data)
+        public async Task<IList<dynamic>> RenderAsync(BlockField field)
         {
             var shapes = new List<dynamic>();
 
-            foreach (var block in JsonConvert.DeserializeObject<EditorBlocks>(data).Blocks)
+            var context = new BlockParserContext
+            {
+                Field = field,
+                LiquidTemplateManager = _liquidTemplateManager,
+                ShapeFactory = _shapeFactory
+            };
+
+            foreach (var block in JsonConvert.DeserializeObject<EditorBlocks>(field.Data).Blocks)
             {
                 if (!_parsers.ContainsKey(block.Type))
                 {
@@ -60,7 +71,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
                 try
                 {
-                    shapes.Add(await _parsers[block.Type].RenderAsync(_shapeFactory, block));
+                    shapes.Add(await _parsers[block.Type].RenderAsync(context, block));
                 } catch (Exception ex)
                 {
                     _logger.LogError(ex, $"Failed to render {block.Type} block.");
