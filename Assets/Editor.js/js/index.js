@@ -65,6 +65,16 @@ window.initializeEditorJS = (id, hiddenFieldId) => {
         },
 
         data: !$hiddenField.value ? {} : JSON.parse($hiddenField.value),
+
+        onChange: () => {
+            editor
+                .save()
+                .then(outputData => {
+                    $hiddenField.value = JSON.stringify(outputData);
+                    document.dispatchEvent(new Event('contentpreview:render'));
+                })
+                .catch(error => {});
+        },
     });
 
     const onSubmit = e => {
