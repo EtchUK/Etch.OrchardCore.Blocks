@@ -1,6 +1,7 @@
 import 'bootstrap';
 import $ from 'jquery';
 
+import Ui from './ui';
 import './index.css';
 
 const selectors = {
@@ -27,28 +28,21 @@ export default class MediaLibraryTool {
         this.modalBodyElement = document.getElementById(
             `${config.id}-ModalBody`
         );
+
+        this.ui = new Ui();
     }
 
     render() {
-        this.wrapper = document.createElement('div');
-        this.wrapper.classList.add('cdx-block');
-        this.wrapper.classList.add('media-library-tool');
-
         if (!this.data.url) {
             this._openMediaLibrary();
-            return this.wrapper;
+            return this.ui.render(this.data);
         }
 
-        this._render(this.data);
-        return this.wrapper;
+        return this.ui.render(this.data);
     }
 
-    save(blockContent) {
-        const $caption = blockContent.querySelector(
-            '.media-library-item__caption'
-        );
-
-        this.data.caption = $caption.innerHTML;
+    save() {
+        this.data.caption = this.ui.getCaption();
 
         return this.data;
     }
@@ -82,42 +76,16 @@ export default class MediaLibraryTool {
             });
     }
 
-    _render(media) {
-        const item = document.createElement('div');
-        item.classList.add('media-library-item');
-
-        const imageWrapper = document.createElement('div');
-        imageWrapper.classList.add('media-library-item__image');
-
-        const image = document.createElement('img');
-        image.classList.add('media-library-item__image');
-        image.src = media.url;
-        imageWrapper.appendChild(image);
-
-        const caption = document.createElement('div');
-        caption['contentEditable'] = true;
-        caption.dataset.placeholder = 'Caption...';
-        caption.classList.add('cdx-input');
-        caption.classList.add('media-library-item__caption');
-        caption.innerHTML = media.caption;
-
-        item.appendChild(imageWrapper);
-        item.appendChild(caption);
-
-        this.wrapper.appendChild(item);
-    }
     /**
      * Updates block with selected media item.
      */
     _setMedia(media) {
-        this.wrapper.innerHTML = '';
-
         this.data = {
             caption: '',
             mediaPath: media.mediaPath,
             url: media.url,
         };
 
-        this._render(this.data);
+        this.ui.render(this.data);
     }
 }
