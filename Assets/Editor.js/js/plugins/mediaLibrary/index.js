@@ -11,6 +11,14 @@ const selectors = {
 };
 
 export default class MediaLibraryTool {
+    static get pasteConfig() {
+        return {
+            patterns: {
+                image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i,
+            },
+        };
+    }
+
     static get toolbox() {
         return {
             title: 'Image',
@@ -22,22 +30,36 @@ export default class MediaLibraryTool {
     constructor({ data, config, api }) {
         this.api = api;
         this.config = config || {};
-
         this.data = data;
 
         this.modalBodyElement = document.getElementById(
             `${config.id}-ModalBody`
         );
 
-        this.ui = new Ui();
+        this.ui = new Ui(this.api, () => {
+            this._openMediaLibrary();
+        });
+    }
+
+    appendCallback() {
+        this._openMediaLibrary();
+    }
+
+    onPaste(event) {
+        switch (event.type) {
+            case 'pattern':
+                const src = event.detail.data;
+
+                this._setMedia({
+                    mediaPath: src,
+                    url: src,
+                });
+
+                break;
+        }
     }
 
     render() {
-        if (!this.data.url) {
-            this._openMediaLibrary();
-            return this.ui.render(this.data);
-        }
-
         return this.ui.render(this.data);
     }
 

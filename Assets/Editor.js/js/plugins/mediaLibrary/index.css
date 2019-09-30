@@ -3,8 +3,20 @@
     max-width: 100%;
 }
 
+    .media-library-tool__select-file {
+        display: none;
+    }
+
+    .is-empty .media-library-tool__select-file {
+        display: block;
+    }
+
 .media-library-item {
     display: block;
+}
+
+.is-empty .media-library-item {
+    display: none;
 }
 
     .media-library-item__image {
