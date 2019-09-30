@@ -16,6 +16,7 @@ export default class MediaLibraryTool {
             patterns: {
                 image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i,
             },
+            tags: ['IMG'],
         };
     }
 
@@ -58,6 +59,15 @@ export default class MediaLibraryTool {
                 this._setMedia({
                     mediaPath: src,
                     url: src,
+                });
+
+                break;
+            case 'tag':
+                const imgTag = event.detail.data;
+
+                this._setMedia({
+                    mediaPath: imgTag.src,
+                    url: imgTag.src,
                 });
 
                 break;
