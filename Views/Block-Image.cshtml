@@ -1,8 +1,19 @@
-﻿<figure>
+﻿@{
+    var tag = new TagBuilder("figure");
+
+    if (Model.Stretched)
+    {
+        tag.AddCssClass("figure--stretched");
+    }
+
+    tag.AddCssClass("figure");
+}
+
+@tag.RenderStartTag()
     <img src="@Model.Url" alt="@Model.Caption" />
 
     @if (Model.HasCaption)
     {
         <figcaption>@Html.Raw(Model.Caption)</figcaption>
     }
-</figure>
+@tag.RenderEndTag()

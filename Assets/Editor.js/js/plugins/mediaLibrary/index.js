@@ -30,7 +30,12 @@ export default class MediaLibraryTool {
     constructor({ data, config, api }) {
         this.api = api;
         this.config = config || {};
-        this.data = data;
+
+        this.data = {
+            url: data.url || '',
+            caption: data.caption || '',
+            stretched: data.stretched !== undefined ? data.stretched : false,
+        };
 
         this.modalBodyElement = document.getElementById(
             `${config.id}-ModalBody`
@@ -61,6 +66,32 @@ export default class MediaLibraryTool {
 
     render() {
         return this.ui.render(this.data);
+    }
+
+    renderSettings() {
+        const settings = [
+            {
+                name: 'stretched',
+                icon: `<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>`,
+            },
+        ];
+
+        const wrapper = document.createElement('div');
+
+        settings.forEach(tune => {
+            let button = document.createElement('div');
+
+            button.classList.add('cdx-settings-button');
+            button.innerHTML = tune.icon;
+            wrapper.appendChild(button);
+
+            button.addEventListener('click', () => {
+                this._toggleTune(tune.name);
+                button.classList.toggle('cdx-settings-button--active');
+            });
+        });
+
+        return wrapper;
     }
 
     save() {
@@ -109,5 +140,18 @@ export default class MediaLibraryTool {
         };
 
         this.ui.render(this.data);
+    }
+
+    _toggleTune(tune) {
+        this.data[tune] = !this.data[tune];
+        this.ui.applyTune(tune, this.data[tune]);
+
+        if (tune === 'stretched') {
+            const blockId = this.api.blocks.getCurrentBlockIndex();
+
+            setTimeout(() => {
+                this.api.blocks.stretchBlock(blockId, this.data[tune]);
+            }, 0);
+        }
     }
 }

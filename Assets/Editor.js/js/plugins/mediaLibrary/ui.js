@@ -30,6 +30,15 @@ export default class Ui {
         this.nodes.wrapper.appendChild(this.nodes.fileButton);
     }
 
+    applyTune(tuneName, value) {
+        if (value) {
+            this.nodes.wrapper.classList.add(`is-${tuneName}`);
+            return;
+        }
+
+        this.nodes.wrapper.classList.remove(`is-${tuneName}`);
+    }
+
     createFileButton() {
         let button = make('div', [
             this.api.styles.button,

@@ -12,6 +12,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
                 new ImageBlockViewModel
                 {
                     Caption = block.Get("caption"),
+                    Stretched = block.Get("stretched", false),
                     Url = block.Get("url")
                 }
             );

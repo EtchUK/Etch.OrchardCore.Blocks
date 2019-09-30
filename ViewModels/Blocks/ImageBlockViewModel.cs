@@ -3,6 +3,7 @@
     public class ImageBlockViewModel
     {
         public string Caption { get; set; }
+        public bool Stretched { get; set; }
         public string Url { get; set; }
 
         public bool HasCaption
