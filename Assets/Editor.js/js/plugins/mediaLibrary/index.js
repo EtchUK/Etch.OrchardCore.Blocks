@@ -93,11 +93,12 @@ export default class MediaLibraryTool {
 
             button.classList.add('cdx-settings-button');
             button.innerHTML = tune.icon;
+            button.classList.toggle(this.api.styles.settingsButtonActive, this.data[tune.name]);
             wrapper.appendChild(button);
 
             button.addEventListener('click', () => {
                 this._toggleTune(tune.name);
-                button.classList.toggle('cdx-settings-button--active');
+                button.classList.toggle(this.api.styles.settingsButtonActive);
             });
         });
 
@@ -127,7 +128,7 @@ export default class MediaLibraryTool {
         $(this.modalBodyElement)
             .find(selectors.mediaFieldSelectButton)
             .off('click')
-            .on('click', async function() {
+            .on('click', async function () {
                 if (window.mediaApp.selectedMedias.length) {
                     self._setMedia(window.mediaApp.selectedMedias[0]);
                 }
