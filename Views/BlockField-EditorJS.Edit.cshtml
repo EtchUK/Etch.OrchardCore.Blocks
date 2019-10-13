@@ -6,6 +6,9 @@
 
 @{
     var isEditorJSEnabled = (await ShellFeaturesManager.GetEnabledFeaturesAsync()).Any(x => x.Id == "Etch.OrchardCore.Blocks.EditorJS");
+
+    var partName = Model.PartFieldDefinition.PartDefinition.Name;
+    var fieldName = Model.PartFieldDefinition.Name;
 }
 
 @if (isEditorJSEnabled)
@@ -18,7 +21,7 @@
 
     <script at="Foot">
         initializeMediaApplication(false, '@Url.Action("MediaApplication", "Admin", new { area = "OrchardCore.Media" })');
-        initializeEditorJS('@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)');
+        initializeEditorJS('@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)', '@partName', '@fieldName');
     </script>
 
     <fieldset class="form-group">

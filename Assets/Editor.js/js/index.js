@@ -8,9 +8,10 @@ import Quote from '@editorjs/quote';
 
 import EditorJS from '@editorjs/editorjs';
 
+import LinkTool from './plugins/link';
 import MediaLibrary from './plugins/mediaLibrary';
 
-window.initializeEditorJS = (id, hiddenFieldId) => {
+window.initializeEditorJS = (id, hiddenFieldId, partName, fieldName) => {
     const $hiddenField = document.getElementById(hiddenFieldId);
 
     if (!$hiddenField) {
@@ -50,6 +51,13 @@ window.initializeEditorJS = (id, hiddenFieldId) => {
                 class: MediaLibrary,
                 config: {
                     id,
+                },
+            },
+            link: {
+                class: LinkTool,
+                config: {
+                    fieldName,
+                    partName,
                 },
             },
             list: {

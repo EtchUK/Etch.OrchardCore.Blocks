@@ -1,12 +1,18 @@
 ﻿using Etch.OrchardCore.Blocks.Drivers;
 using Etch.OrchardCore.Blocks.Fields;
 using Etch.OrchardCore.Blocks.Parsers;
+using Etch.OrchardCore.Blocks.Services;
+using Etch.OrchardCore.Blocks.Settings;
 using Etch.OrchardCore.Blocks.ViewModels.Blocks;
 using Fluid;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
+using OrchardCore.ContentTypes.Editors;
 using OrchardCore.Modules;
+using System;
 
 namespace Etch.OrchardCore.Blocks
 {
@@ -23,12 +29,25 @@ namespace Etch.OrchardCore.Blocks
             TemplateContext.GlobalMemberAccessStrategy.Register<RawBlockViewModel>();
         }
 
+        public override void Configure(IApplicationBuilder builder, IRouteBuilder routes, IServiceProvider serviceProvider)
+        {
+            routes.MapAreaRoute(
+                name: "ContentSearch",
+                areaName: "Etch.OrchardCore.Blocks",
+                template: "Blocks/SearchContentItems",
+                defaults: new { controller = "LinkContentAdmin", action = "SearchContentItems" }
+            );
+        }
+
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ContentField, BlockField>();
             services.AddScoped<IContentFieldDisplayDriver, BlockFieldDriver>();
+            services.AddScoped<IContentPartFieldDefinitionDisplayDriver, BlockFieldSettingsDriver>();
 
             services.AddScoped<IBlocksParser, DefaultBlocksParser>();
+
+            services.AddScoped<IContentSearchResultsProvider, DefaultContentSearchResultsProvider>();
         }
     }
 }
