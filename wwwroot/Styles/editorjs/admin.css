@@ -13,3 +13,14 @@
   padding-bottom: 100px !important;
   /* 1. */ }
 
+/**
+ * Overrides block styles in editor.js
+ */
+/**
+ * Override the block focused state to make it obvious
+ * what block is currently focused.
+ */
+.ce-block--focused {
+  background-color: rgba(207, 214, 229, 0.27);
+  background-image: none; }
+
