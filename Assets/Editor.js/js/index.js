@@ -11,7 +11,13 @@ import EditorJS from '@editorjs/editorjs';
 import LinkTool from './plugins/link';
 import MediaLibrary from './plugins/mediaLibrary';
 
-window.initializeEditorJS = (id, hiddenFieldId, partName, fieldName) => {
+window.initializeEditorJS = (
+    tenantPath,
+    id,
+    hiddenFieldId,
+    partName,
+    fieldName
+) => {
     const $hiddenField = document.getElementById(hiddenFieldId);
 
     if (!$hiddenField) {
@@ -58,6 +64,7 @@ window.initializeEditorJS = (id, hiddenFieldId, partName, fieldName) => {
                 config: {
                     fieldName,
                     partName,
+                    tenantPath,
                 },
             },
             list: {
