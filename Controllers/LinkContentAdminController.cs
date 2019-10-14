@@ -40,7 +40,8 @@ namespace Etch.OrchardCore.Blocks.Controllers
             var partFieldDefinition = _contentDefinitionManager.GetPartDefinition(part)?.Fields
                 .FirstOrDefault(f => f.Name == field);
 
-            var fieldSettings = partFieldDefinition?.Settings.ToObject<BlockFieldSettings>();
+            var fieldSettings = partFieldDefinition?.GetSettings<BlockFieldSettings>();
+
             if (fieldSettings == null)
             {
                 return BadRequest("Unable to find field definition");
