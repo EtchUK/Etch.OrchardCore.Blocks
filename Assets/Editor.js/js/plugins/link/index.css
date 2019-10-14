@@ -9,7 +9,7 @@
 
     .link-tool-editor__content-items {
         list-style: none;
-        margin: 0;
+        margin-bottom: 0!important;
         padding: 8px;
         width: 100%;
 
