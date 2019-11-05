@@ -1,0 +1,40 @@
+{
+  "steps": [
+    {
+      "name": "ContentDefinition",
+      "ContentTypes": [],
+      "ContentParts": [
+        {
+          "Name": "BlockBody",
+          "Settings": {
+            "Attachable": "True",
+            "Reusable": "True",
+            "Description": "Provides rich text editor for curating content for body of content item.",
+            "DisplayName": null
+          },
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "BlockField",
+              "Name": "Body",
+              "Settings": {
+                "DisplayName": "Body",
+                "Editor": "Standard",
+                "DisplayMode": null,
+                "LinkableContentTypes": [],
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.ContentTypes.Editors;
+using OrchardCore.Data.Migration;
 using OrchardCore.Modules;
 using System;
 
@@ -48,6 +49,8 @@ namespace Etch.OrchardCore.Blocks
             services.AddScoped<IBlocksParser, DefaultBlocksParser>();
 
             services.AddScoped<IContentSearchResultsProvider, DefaultContentSearchResultsProvider>();
+
+            services.AddScoped<IDataMigration, Migrations>();
         }
     }
 }

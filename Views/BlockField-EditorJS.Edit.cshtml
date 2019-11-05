@@ -29,7 +29,10 @@
     </script>
 
     <fieldset class="form-group">
-        <h5>@Model.PartFieldDefinition.DisplayName()</h5>
+        @if (Model.PartFieldDefinition.PartDefinition.Name != "BlockBody")
+        {
+            <h5>@Model.PartFieldDefinition.DisplayName()</h5>
+        }
         <div id="@Html.IdFor(m => m)"></div>
         @Html.HiddenFor(m => m.Data)
     </fieldset>

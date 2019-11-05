@@ -3,6 +3,9 @@
 @using OrchardCore.ContentManagement.Metadata.Models
 
 <fieldset class="form-group">
-    <h5><label asp-for="Data">@Model.PartFieldDefinition.DisplayName()</label></h5>
+    @if (Model.PartFieldDefinition.PartDefinition.Name != "BlockBody")
+    {
+        <h5><label asp-for="Data">@Model.PartFieldDefinition.DisplayName()</label></h5>
+    }
     <textarea asp-for="Data" rows="5" class="form-control content-preview-text"></textarea>
 </fieldset>
