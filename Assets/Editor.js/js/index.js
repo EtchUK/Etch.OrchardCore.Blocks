@@ -15,6 +15,7 @@ window.initializeEditorJS = (
     tenantPath,
     id,
     hiddenFieldId,
+    typeName,
     partName,
     fieldName
 ) => {
@@ -64,6 +65,7 @@ window.initializeEditorJS = (
                 config: {
                     fieldName,
                     partName,
+                    typeName,
                     tenantPath,
                 },
             },
