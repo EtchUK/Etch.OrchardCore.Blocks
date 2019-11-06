@@ -91,7 +91,7 @@ export default class LinkTool {
 
             if (this.nodes.input.value.length > 2) {
                 fetch(
-                    `${this.config.tenantPath}/Blocks/SearchContentItems?part=${this.config.partName}&field=${this.config.fieldName}&query=${this.nodes.input.value}`
+                    `${this.config.tenantPath}/Blocks/SearchContentItems?type=${this.config.typeName}&part=${this.config.partName}&field=${this.config.fieldName}&query=${this.nodes.input.value}`
                 )
                     .then(response => response.json())
                     .then(contentItems =>

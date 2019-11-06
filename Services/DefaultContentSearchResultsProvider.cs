@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Autoroute.Model;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Records;
-using OrchardCore.DisplayManagement;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
