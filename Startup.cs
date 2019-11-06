@@ -1,5 +1,6 @@
 ﻿using Etch.OrchardCore.Blocks.Drivers;
 using Etch.OrchardCore.Blocks.Fields;
+using Etch.OrchardCore.Blocks.Models;
 using Etch.OrchardCore.Blocks.Parsers;
 using Etch.OrchardCore.Blocks.Services;
 using Etch.OrchardCore.Blocks.Settings;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.ContentTypes.Editors;
+using OrchardCore.Data.Migration;
 using OrchardCore.Modules;
 using System;
 
@@ -45,9 +47,15 @@ namespace Etch.OrchardCore.Blocks
             services.AddScoped<IContentFieldDisplayDriver, BlockFieldDriver>();
             services.AddScoped<IContentPartFieldDefinitionDisplayDriver, BlockFieldSettingsDriver>();
 
+            services.AddSingleton<ContentPart, BlockBodyPart>();
+            services.AddScoped<IContentPartDisplayDriver, BlockBodyPartDisplay>();
+            services.AddScoped<IContentTypePartDefinitionDisplayDriver, BlockBodyPartSettingsDriver>();
+
             services.AddScoped<IBlocksParser, DefaultBlocksParser>();
 
             services.AddScoped<IContentSearchResultsProvider, DefaultContentSearchResultsProvider>();
+
+            services.AddScoped<IDataMigration, Migrations>();
         }
     }
 }

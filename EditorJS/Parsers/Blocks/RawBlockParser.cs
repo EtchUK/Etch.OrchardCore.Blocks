@@ -12,7 +12,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
         public async Task<dynamic> RenderAsync(BlockParserContext context, Block block)
         {
             var templateContext = new TemplateContext();
-            templateContext.SetValue("ContentItem", context.Field.ContentItem);
+            templateContext.SetValue("ContentItem", context.ContentItem);
 
             return await context.ShapeFactory.New.Block__Raw(
                 new RawBlockViewModel

@@ -1,6 +1,7 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks;
 using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
 using Etch.OrchardCore.Blocks.Fields;
+using Etch.OrchardCore.Blocks.Models;
 using Etch.OrchardCore.Blocks.Parsers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -53,16 +54,33 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
         public async Task<IList<dynamic>> RenderAsync(BlockField field)
         {
-            var shapes = new List<dynamic>();
-
-            var context = new BlockParserContext
+            return await RenderAsync(new BlockParserContext
             {
-                Field = field,
+                ContentItem = field.ContentItem,
                 LiquidTemplateManager = _liquidTemplateManager,
                 ShapeFactory = _shapeFactory
-            };
+            }, field.Data);
+        }
 
-            foreach (var block in JsonConvert.DeserializeObject<EditorBlocks>(field.Data).Blocks)
+        public async Task<IList<dynamic>> RenderAsync(BlockBodyPart part)
+        {
+            return await RenderAsync(new BlockParserContext
+            {
+                ContentItem = part.ContentItem,
+                LiquidTemplateManager = _liquidTemplateManager,
+                ShapeFactory = _shapeFactory
+            }, part.Data);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        public async Task<IList<dynamic>> RenderAsync(BlockParserContext context, string data)
+        {
+            var shapes = new List<dynamic>();
+
+            foreach (var block in JsonConvert.DeserializeObject<EditorBlocks>(data).Blocks)
             {
                 if (!_parsers.ContainsKey(block.Type))
                 {
@@ -72,7 +90,8 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
                 try
                 {
                     shapes.Add(await _parsers[block.Type].RenderAsync(context, block));
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     _logger.LogError(ex, $"Failed to render {block.Type} block.");
                 }
