@@ -204,7 +204,7 @@ export default class LinkTool {
             return;
         }
 
-        this.applyUrl();
+        this.applyUrl(value);
 
         /**
          * Preventing events that will be able to happen
