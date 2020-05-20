@@ -11,7 +11,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
             return await context.ShapeFactory.New.Block__Paragraph(
                 new ParagraphBlockViewModel 
                 { 
-                    Text = block.Get("text")
+                    Text = BlockParserHelper.AddPathBaseToRelativeLinks(context.HttpContext.Request.PathBase, block.Get("text"))
                 }
             );
         }

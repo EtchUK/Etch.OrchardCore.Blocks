@@ -3,6 +3,7 @@ using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
 using Etch.OrchardCore.Blocks.Fields;
 using Etch.OrchardCore.Blocks.Models;
 using Etch.OrchardCore.Blocks.Parsers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OrchardCore.DisplayManagement;
@@ -33,6 +34,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
         #region Dependencies
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILiquidTemplateManager _liquidTemplateManager;
         private readonly ILogger<BlocksParser> _logger;
         private readonly IShapeFactory _shapeFactory;
@@ -41,8 +43,9 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
         #region Constructor
 
-        public BlocksParser(ILiquidTemplateManager liquidTemplateManager, ILogger<BlocksParser> logger, IShapeFactory shapeFactory)
+        public BlocksParser(IHttpContextAccessor httpContextAccessor, ILiquidTemplateManager liquidTemplateManager, ILogger<BlocksParser> logger, IShapeFactory shapeFactory)
         {
+            _httpContextAccessor = httpContextAccessor;
             _liquidTemplateManager = liquidTemplateManager;
             _logger = logger;
             _shapeFactory = shapeFactory;
@@ -57,6 +60,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
             return await RenderAsync(new BlockParserContext
             {
                 ContentItem = field.ContentItem,
+                HttpContext = _httpContextAccessor.HttpContext,
                 LiquidTemplateManager = _liquidTemplateManager,
                 ShapeFactory = _shapeFactory
             }, field.Data);
@@ -67,6 +71,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
             return await RenderAsync(new BlockParserContext
             {
                 ContentItem = part.ContentItem,
+                HttpContext = _httpContextAccessor.HttpContext,
                 LiquidTemplateManager = _liquidTemplateManager,
                 ShapeFactory = _shapeFactory
             }, part.Data);
