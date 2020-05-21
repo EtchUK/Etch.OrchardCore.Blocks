@@ -8,7 +8,6 @@ export default class Ui {
     constructor(api, onSelectFile) {
         this.api = api;
         this.onSelectFile = onSelectFile;
-
         this.nodes = {
             caption: make('div', ['cdx-input', 'media-library-item__caption'], {
                 contentEditable: true,
@@ -28,15 +27,8 @@ export default class Ui {
         this.nodes.wrapper.appendChild(this.nodes.item);
 
         this.nodes.wrapper.appendChild(this.nodes.fileButton);
-    }
 
-    applyTune(tuneName, value) {
-        if (value) {
-            this.nodes.wrapper.classList.add(`is-${tuneName}`);
-            return;
-        }
-
-        this.nodes.wrapper.classList.remove(`is-${tuneName}`);
+        this.blockIndex = this.api.blocks.getCurrentBlockIndex() + 1;
     }
 
     createFileButton() {
@@ -60,6 +52,10 @@ export default class Ui {
 
     render(toolData) {
         this.nodes.image.src = toolData.url;
+        this.nodes.image.onload = () => {
+            this.api.blocks.stretchBlock(this.blockIndex, !!toolData.stretched);
+        };
+
         this.nodes.caption.innerHTML = toolData.caption;
 
         if (!toolData.url) {

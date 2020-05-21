@@ -93,7 +93,13 @@ export default class MediaLibraryTool {
 
             button.classList.add('cdx-settings-button');
             button.innerHTML = tune.icon;
-            button.classList.toggle(this.api.styles.settingsButtonActive, this.data[tune.name]);
+
+            if (this.data[tune.name]) {
+                button.classList.add(this.api.styles.settingsButtonActive);
+            } else {
+                button.classList.remove(this.api.styles.settingsButtonActive);
+            }
+
             wrapper.appendChild(button);
 
             button.addEventListener('click', () => {
@@ -155,7 +161,6 @@ export default class MediaLibraryTool {
 
     _toggleTune(tune) {
         this.data[tune] = !this.data[tune];
-        this.ui.applyTune(tune, this.data[tune]);
 
         if (tune === 'stretched') {
             const blockId = this.api.blocks.getCurrentBlockIndex();
