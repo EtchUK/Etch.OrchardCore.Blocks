@@ -51,8 +51,6 @@ namespace Etch.OrchardCore.Blocks
             services.AddScoped<IContentPartDisplayDriver, BlockBodyPartDisplay>();
             services.AddScoped<IContentTypePartDefinitionDisplayDriver, BlockBodyPartSettingsDriver>();
 
-            services.AddScoped<IBlocksParser, DefaultBlocksParser>();
-
             services.AddScoped<IContentSearchResultsProvider, DefaultContentSearchResultsProvider>();
 
             services.AddScoped<IDataMigration, Migrations>();
