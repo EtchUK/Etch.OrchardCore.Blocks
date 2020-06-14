@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.2.0-rc2</Version>
+    <Version>0.3.0-rc2</Version>
     <PackageId>Etch.OrchardCore.Blocks</PackageId>
     <Title>Editor.js</Title>
     <Authors>Etch UK</Authors>
