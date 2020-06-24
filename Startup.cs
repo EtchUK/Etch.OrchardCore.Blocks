@@ -43,12 +43,14 @@ namespace Etch.OrchardCore.Blocks
 
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ContentField, BlockField>();
-            services.AddScoped<IContentFieldDisplayDriver, BlockFieldDriver>();
+            services.AddContentField<BlockField>()
+                .UseDisplayDriver<BlockFieldDriver>();
+
             services.AddScoped<IContentPartFieldDefinitionDisplayDriver, BlockFieldSettingsDriver>();
 
-            services.AddSingleton<ContentPart, BlockBodyPart>();
-            services.AddScoped<IContentPartDisplayDriver, BlockBodyPartDisplay>();
+            services.AddContentPart<BlockBodyPart>()
+                .UseDisplayDriver<BlockBodyPartDisplay>();
+            
             services.AddScoped<IContentTypePartDefinitionDisplayDriver, BlockBodyPartSettingsDriver>();
 
             services.AddScoped<IContentSearchResultsProvider, DefaultContentSearchResultsProvider>();
