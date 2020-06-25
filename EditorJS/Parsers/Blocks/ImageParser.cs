@@ -13,9 +13,21 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
                 {
                     Caption = block.Get("caption"),
                     Stretched = block.Get("stretched", false),
-                    Url = block.Get("url")
+                    Url = GetMediaUrl(context, block)
                 }
             );
+        }
+
+        private string GetMediaUrl(BlockParserContext context, Block block)
+        {
+            var mediaPath = block.Get("mediaPath");
+
+            if (string.IsNullOrEmpty(mediaPath))
+            {
+                return block.Get("url");
+            }
+
+            return context.MediaFileStore.MapPathToPublicUrl(mediaPath);
         }
     }
 }
