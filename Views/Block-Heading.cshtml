@@ -1,5 +1,8 @@
-﻿@{
+﻿@inject OrchardCore.Liquid.ISlugService SlugService
+
+@{
     TagBuilder tag = Tag(Model, $"h{Model.Level.ToString()}");
+    tag.Attributes["id"] = SlugService.Slugify(Model.Text);
 }
 
 @tag.RenderStartTag()
