@@ -1,5 +1,6 @@
 ﻿using Etch.OrchardCore.Blocks.Drivers;
 using Etch.OrchardCore.Blocks.Fields;
+using Etch.OrchardCore.Blocks.Indexing;
 using Etch.OrchardCore.Blocks.Models;
 using Etch.OrchardCore.Blocks.Parsers;
 using Etch.OrchardCore.Blocks.Services;
@@ -13,6 +14,7 @@ using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.ContentTypes.Editors;
 using OrchardCore.Data.Migration;
+using OrchardCore.Indexing;
 using OrchardCore.Modules;
 using System;
 
@@ -54,6 +56,9 @@ namespace Etch.OrchardCore.Blocks
             services.AddScoped<IContentSearchResultsProvider, DefaultContentSearchResultsProvider>();
 
             services.AddScoped<IDataMigration, Migrations>();
+
+            services.AddScoped<IContentFieldIndexHandler, BlockFieldPartIndexHandler>();
+            services.AddScoped<IContentPartIndexHandler, BlockBodyPartIndexHandler>();
         }
     }
 }

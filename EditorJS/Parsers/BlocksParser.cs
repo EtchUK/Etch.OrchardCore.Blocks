@@ -20,17 +20,17 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
 
         private IDictionary<string, IBlockParser> _parsers = new Dictionary<string, IBlockParser>
         {
-            { "delimiter", new DelimiterBlockParser() },
-            { "embed", new EmbedBlockParser() },
-            { "header", new HeadingBlockParser() },
-            { "image", new ImageParser() },
-            { "list", new ListBlockParser() },
-            { "paragraph", new ParagraphBlockParser() },
-            { "quote", new QuoteBlockParser() },
-            { "raw", new RawBlockParser() }
+            { Constants.DelimiterBlock, new DelimiterBlockParser() },
+            { Constants.EmbedBlock, new EmbedBlockParser() },
+            { Constants.HeaderBlock, new HeadingBlockParser() },
+            { Constants.ImageBlock, new ImageParser() },
+            { Constants.ListBlock, new ListBlockParser() },
+            { Constants.ParagraphBlock, new ParagraphBlockParser() },
+            { Constants.QuoteBlock, new QuoteBlockParser() },
+            { Constants.RawBlock, new RawBlockParser() }
         };
 
-        #endregion
+        #endregion Properties
 
         #region Dependencies
 
@@ -39,7 +39,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
         private readonly ILogger<BlocksParser> _logger;
         private readonly IShapeFactory _shapeFactory;
 
-        #endregion
+        #endregion Dependencies
 
         #region Constructor
 
@@ -51,7 +51,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
             _shapeFactory = shapeFactory;
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Implementation
 
@@ -77,7 +77,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
             }, part.Data);
         }
 
-        #endregion
+        #endregion Implementation
 
         #region Private Methods
 
@@ -105,6 +105,6 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
             return shapes;
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }
