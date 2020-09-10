@@ -5,10 +5,9 @@ using OrchardCore.Modules.Manifest;
     Category = "Content Management",
     Description = "Blocks module enables content items to have a block based editor.",
     Name = "Blocks",
-    Version = "0.2.2",
+    Version = "0.2.3",
     Website = "https://etchuk.com"
 )]
-
 [assembly: Feature(
     Id = "Etch.OrchardCore.Blocks",
     Name = "Blocks",
@@ -21,6 +20,6 @@ using OrchardCore.Modules.Manifest;
     Id = "Etch.OrchardCore.Blocks.EditorJS",
     Name = "Editor.js",
     Description = "Makes Editor.js available as an editor for blocks.",
-    Dependencies = new string [] { "OrchardCore.Media" },
+    Dependencies = new string[] { "OrchardCore.Media" },
     Category = "Content"
 )]

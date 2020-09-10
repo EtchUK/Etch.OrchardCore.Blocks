@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.2.2-rc1</Version>
+    <Version>0.2.3-rc1</Version>
     <PackageId>Etch.OrchardCore.Blocks</PackageId>
     <Title>Editor.js</Title>
     <Authors>Etch UK</Authors>
@@ -35,5 +35,4 @@
     <Exec Command="npm install" />
     <Exec Command="npm run build" />
   </Target>
-
 </Project>
