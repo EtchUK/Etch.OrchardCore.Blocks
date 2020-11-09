@@ -13,12 +13,12 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Models
 
         public T Get<T>(string property, T defaultValue)
         {
-            return Data.ContainsKey(property) ? (T)Data[property] : defaultValue;
+            return Has(property) ? (T)Data[property] : defaultValue;
         }
 
         public string Get(string property)
         {
-            return Data[property]?.ToString() ?? string.Empty;
+            return Has(property) ? Data[property]?.ToString() : string.Empty;
         }
 
         public bool Has(string property)
