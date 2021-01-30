@@ -8,6 +8,11 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
     {
         public async Task<dynamic> RenderAsync(BlockParserContext context, Block block)
         {
+            if (string.IsNullOrWhiteSpace(block.Get("text")))
+            {
+                return await context.ShapeFactory.New.Block__LineBreak();
+            }
+
             return await context.ShapeFactory.New.Block__Paragraph(
                 new ParagraphBlockViewModel 
                 { 
