@@ -19,7 +19,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
     {
         #region Properties
 
-        private IDictionary<string, IBlockParser> _parsers = new Dictionary<string, IBlockParser>
+        private readonly IDictionary<string, IBlockParser> _parsers = new Dictionary<string, IBlockParser>
         {
             { "delimiter", new DelimiterBlockParser() },
             { "embed", new EmbedBlockParser() },

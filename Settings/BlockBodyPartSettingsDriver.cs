@@ -10,31 +10,31 @@ namespace Etch.OrchardCore.Blocks.Settings
 {
     public class BlockBodyPartSettingsDriver : ContentTypePartDefinitionDisplayDriver
     {
-        public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition)
+        public override IDisplayResult Edit(ContentTypePartDefinition model)
         {
-            if (!string.Equals(nameof(BlockBodyPart), contentTypePartDefinition.PartDefinition.Name, StringComparison.Ordinal))
+            if (!string.Equals(nameof(BlockBodyPart), model.PartDefinition.Name, StringComparison.Ordinal))
             {
                 return null;
             }
 
-            return Initialize<BlockBodyPartSettingsViewModel>("BlockBodyPartSettings_Edit", model =>
+            return Initialize<BlockBodyPartSettingsViewModel>("BlockBodyPartSettings_Edit", settings =>
             {
-                var settings = contentTypePartDefinition.GetSettings<BlockBodyPartSettings>();
+                var blockBodyPartSettings = model.GetSettings<BlockBodyPartSettings>();
 
-                model.LinkableContentTypes = settings.LinkableContentTypes;
-                model.BlockBodyPartSettings = settings;
+                settings.LinkableContentTypes = blockBodyPartSettings.LinkableContentTypes;
+                settings.BlockBodyPartSettings = blockBodyPartSettings;
             }).Location("Content");
         }
 
-        public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
+        public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition model, UpdateTypePartEditorContext context)
         {
-            var model = new BlockBodyPartSettings();
+            var settings = new BlockBodyPartSettings();
 
-            await context.Updater.TryUpdateModelAsync(model, Prefix);
+            await context.Updater.TryUpdateModelAsync(settings, Prefix);
 
-            context.Builder.WithSetting(nameof(BlockBodyPartSettings.LinkableContentTypes), model.LinkableContentTypes);
+            context.Builder.WithSettings(settings);
 
-            return Edit(contentTypePartDefinition);
+            return Edit(model);
         }
     }
 }
