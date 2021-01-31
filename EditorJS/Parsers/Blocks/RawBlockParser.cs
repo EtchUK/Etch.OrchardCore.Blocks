@@ -19,7 +19,7 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
                 {
                     Html = await context.LiquidTemplateManager.RenderAsync(block.Get("html"), HtmlEncoder.Default, templateContext)
                 }
-            ); ;
+            );
         }
     }
 }
