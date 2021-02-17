@@ -28,6 +28,11 @@ namespace Etch.OrchardCore.Blocks.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition model, UpdateTypePartEditorContext context)
         {
+            if (!string.Equals(nameof(BlockBodyPart), model.PartDefinition.Name, StringComparison.Ordinal))
+            {
+                return null;
+            }
+
             var settings = new BlockBodyPartSettings();
 
             await context.Updater.TryUpdateModelAsync(settings, Prefix);
