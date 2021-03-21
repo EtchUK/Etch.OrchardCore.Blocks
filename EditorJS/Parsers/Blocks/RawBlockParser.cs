@@ -1,7 +1,7 @@
 ﻿using Etch.OrchardCore.Blocks.EditorJS.Parsers.Models;
 using Etch.OrchardCore.Blocks.ViewModels.Blocks;
-using Fluid;
-using OrchardCore.Liquid;
+using Fluid.Values;
+using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
@@ -11,13 +11,10 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers.Blocks
     {
         public async Task<dynamic> RenderAsync(BlockParserContext context, Block block)
         {
-            var templateContext = new TemplateContext();
-            templateContext.SetValue("ContentItem", context.ContentItem);
-
             return await context.ShapeFactory.New.Block__Raw(
                 new RawBlockViewModel
                 {
-                    Html = await context.LiquidTemplateManager.RenderAsync(block.Get("html"), HtmlEncoder.Default, templateContext)
+                    Html = await context.LiquidTemplateManager.RenderStringAsync(block.Get("html"), HtmlEncoder.Default, block, new Dictionary<string, FluidValue>() { ["ContentItem"] = new ObjectValue(context.ContentItem) })
                 }
             );
         }
