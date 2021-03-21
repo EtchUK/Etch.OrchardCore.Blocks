@@ -28,6 +28,7 @@ namespace Etch.OrchardCore.Blocks
             _contentDefinitionManager.AlterPartDefinition("BlockBodyPart", builder => builder
                 .Attachable()
                 .Reusable()
+                .WithDisplayName("Block Body")
                 .WithDescription("Provides rich text editor for curating content for body of content item.")
                 .WithDefaultPosition("5")
             );

@@ -4,6 +4,7 @@ using Etch.OrchardCore.Blocks.Models;
 using Etch.OrchardCore.Blocks.Parsers;
 using Etch.OrchardCore.Blocks.Services;
 using Etch.OrchardCore.Blocks.Settings;
+using Etch.OrchardCore.Blocks.ViewModels;
 using Etch.OrchardCore.Blocks.ViewModels.Blocks;
 using Fluid;
 using Microsoft.AspNetCore.Builder;
@@ -20,17 +21,6 @@ namespace Etch.OrchardCore.Blocks
 {
     public class Startup : StartupBase
     {
-        static Startup()
-        {
-            TemplateContext.GlobalMemberAccessStrategy.Register<EmbedBlockViewModel>();
-            TemplateContext.GlobalMemberAccessStrategy.Register<HeadingBlockViewModel>();
-            TemplateContext.GlobalMemberAccessStrategy.Register<ImageBlockViewModel>();
-            TemplateContext.GlobalMemberAccessStrategy.Register<ListBlockViewModel>();
-            TemplateContext.GlobalMemberAccessStrategy.Register<ParagraphBlockViewModel>();
-            TemplateContext.GlobalMemberAccessStrategy.Register<QuoteBlockViewModel>();
-            TemplateContext.GlobalMemberAccessStrategy.Register<RawBlockViewModel>();
-        }
-
         public override void Configure(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
         {
             routes.MapAreaControllerRoute(
@@ -56,6 +46,18 @@ namespace Etch.OrchardCore.Blocks
             services.AddScoped<IContentSearchResultsProvider, DefaultContentSearchResultsProvider>();
 
             services.AddScoped<IDataMigration, Migrations>();
+
+            services.Configure<TemplateOptions>(o =>
+            {
+                o.MemberAccessStrategy.Register<DisplayBlockFieldViewModel>();
+                o.MemberAccessStrategy.Register<EmbedBlockViewModel>();
+                o.MemberAccessStrategy.Register<HeadingBlockViewModel>();
+                o.MemberAccessStrategy.Register<ImageBlockViewModel>();
+                o.MemberAccessStrategy.Register<ListBlockViewModel>();
+                o.MemberAccessStrategy.Register<ParagraphBlockViewModel>();
+                o.MemberAccessStrategy.Register<QuoteBlockViewModel>();
+                o.MemberAccessStrategy.Register<RawBlockViewModel>();
+            });
         }
     }
 }
