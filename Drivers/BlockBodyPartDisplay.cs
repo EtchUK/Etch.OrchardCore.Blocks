@@ -28,11 +28,6 @@ namespace Etch.OrchardCore.Blocks.Drivers
 
         public override async Task<IDisplayResult> DisplayAsync(BlockBodyPart part, BuildPartDisplayContext context)
         {
-            if (context.DisplayType != "Detail")
-            {
-                return null;
-            }
-
             var blocks = await _blocksParser.RenderAsync(part);
 
             return Initialize<DisplayBlockBodyPartViewModel>("BlockBodyPart", model =>
@@ -41,7 +36,7 @@ namespace Etch.OrchardCore.Blocks.Drivers
                 model.TypePartDefinition = context.TypePartDefinition;
                 model.Blocks = blocks;
             })
-            .Location("Content");
+            .Location("Detail", "Content:5");
         }
 
         public override IDisplayResult Edit(BlockBodyPart part, BuildPartEditorContext context)
