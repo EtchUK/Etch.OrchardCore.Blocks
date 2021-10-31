@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <PackageId>Etch.OrchardCore.Blocks</PackageId>
     <Title>Editor.js</Title>
     <Authors>Etch UK</Authors>
@@ -17,15 +17,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OrchardCore.Admin" Version="1.0.0" />
-    <PackageReference Include="OrchardCore.Autoroute" Version="1.0.0" />
-    <PackageReference Include="OrchardCore.ContentManagement" Version="1.0.0" />
-    <PackageReference Include="OrchardCore.ContentManagement.Display" Version="1.0.0" />
-    <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0" />
-    <PackageReference Include="OrchardCore.Liquid.Abstractions" Version="1.0.0" />
-    <PackageReference Include="OrchardCore.Media.Abstractions" Version="1.0.0" />
-    <PackageReference Include="OrchardCore.ResourceManagement" Version="1.0.0" />
-    <PackageReference Include="OrchardCore.Module.Targets" Version="1.0.0" />
+    <PackageReference Include="OrchardCore.Admin" Version="1.1.0" />
+    <PackageReference Include="OrchardCore.Autoroute" Version="1.1.0" />
+    <PackageReference Include="OrchardCore.ContentManagement" Version="1.1.0" />
+    <PackageReference Include="OrchardCore.ContentManagement.Display" Version="1.1.0" />
+    <PackageReference Include="OrchardCore.DisplayManagement" Version="1.1.0" />
+    <PackageReference Include="OrchardCore.Liquid.Abstractions" Version="1.1.0" />
+    <PackageReference Include="OrchardCore.Media.Abstractions" Version="1.1.0" />
+    <PackageReference Include="OrchardCore.ResourceManagement" Version="1.1.0" />
+    <PackageReference Include="OrchardCore.Module.Targets" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
