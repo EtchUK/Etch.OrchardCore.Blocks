@@ -50,6 +50,7 @@ namespace Etch.OrchardCore.Blocks
             services.Configure<TemplateOptions>(o =>
             {
                 o.MemberAccessStrategy.Register<DisplayBlockFieldViewModel>();
+                o.MemberAccessStrategy.Register<DisplayBlockBodyPartViewModel>();
                 o.MemberAccessStrategy.Register<EmbedBlockViewModel>();
                 o.MemberAccessStrategy.Register<HeadingBlockViewModel>();
                 o.MemberAccessStrategy.Register<ImageBlockViewModel>();
