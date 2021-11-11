@@ -17,7 +17,8 @@ window.initializeEditorJS = (
     hiddenFieldId,
     typeName,
     partName,
-    fieldName
+    fieldName,
+    placeholder
 ) => {
     const $hiddenField = document.getElementById(hiddenFieldId);
 
@@ -34,7 +35,7 @@ window.initializeEditorJS = (
     const editor = new EditorJS({
         holder: id,
 
-        placeholder: 'Enter your content here...',
+        placeholder: placeholder || 'Enter your content here...',
 
         tools: {
             delimiter: Delimiter,

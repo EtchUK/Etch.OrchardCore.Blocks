@@ -1,4 +1,6 @@
-﻿@model Etch.OrchardCore.Blocks.ViewModels.EditBlockBodyPartViewModel
+﻿@using Etch.OrchardCore.Blocks.Settings 
+
+@model Etch.OrchardCore.Blocks.ViewModels.EditBlockBodyPartViewModel
 
 @inject OrchardCore.Environment.Shell.IShellFeaturesManager ShellFeaturesManager
 
@@ -8,6 +10,8 @@
     var typeName = Model.TypePartDefinition.ContentTypeDefinition.Name;
     var partName = Model.TypePartDefinition.Name;
     var tenantPath = Context.Request.PathBase.ToString();
+
+    var settings = Model.TypePartDefinition.GetSettings<BlockBodyPartSettings>();
 }
 
 @if (isEditorJSEnabled)
@@ -20,7 +24,7 @@
 
     <script at="Foot">
         initializeMediaApplication(false, '@Url.Action("MediaApplication", "Admin", new { area = "OrchardCore.Media" })', '@Context.Request.PathBase.ToString()');
-        initializeEditorJS('@tenantPath', '@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)', '@typeName', '@partName', '');
+        initializeEditorJS('@tenantPath', '@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)', '@typeName', '@partName', '', '@settings.Placeholder');
     </script>
 
     <div class="form-group">

@@ -1,6 +1,14 @@
 ﻿@model Etch.OrchardCore.Blocks.ViewModels.BlockBodyPartSettingsViewModel
 
 <div class="form-group">
+    <div class="w-md-75 w-xl-50 pr-md-3">
+        <label asp-for="Placeholder">@T["Placeholder"]</label>
+        <textarea asp-for="Placeholder" rows="2" class="form-control"></textarea>
+    </div>
+    <span class="hint">@T["The hint text displayed before content is added."]</span>
+</div>
+
+<div class="form-group">
     <label asp-for="LinkableContentTypes">@T["Linkable Content Types"]</label>
     <span class="hint">@T["The content types that should be searched when adding links."]</span>
     @await Component.InvokeAsync("SelectContentTypes", new { selectedContentTypes = Model.LinkableContentTypes, htmlName = Html.NameFor(m => m.LinkableContentTypes) })

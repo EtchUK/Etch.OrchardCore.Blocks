@@ -22,6 +22,7 @@ namespace Etch.OrchardCore.Blocks.Settings
                 var blockBodyPartSettings = model.GetSettings<BlockBodyPartSettings>();
 
                 settings.LinkableContentTypes = blockBodyPartSettings.LinkableContentTypes;
+                settings.Placeholder = blockBodyPartSettings.Placeholder;
                 settings.BlockBodyPartSettings = blockBodyPartSettings;
             }).Location("Content");
         }
