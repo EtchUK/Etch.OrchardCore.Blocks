@@ -5,7 +5,7 @@ using OrchardCore.Modules.Manifest;
     Category = "Content Management",
     Description = "Blocks module enables content items to have a block based editor.",
     Name = "Blocks",
-    Version = "1.1.2",
+    Version = "1.2.0",
     Website = "https://etchuk.com"
 )]
 
