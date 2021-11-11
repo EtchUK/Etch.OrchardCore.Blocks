@@ -6,6 +6,7 @@ using Etch.OrchardCore.Blocks.Parsers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using OrchardCore.ContentManagement;
 using OrchardCore.DisplayManagement;
 using OrchardCore.Liquid;
 using OrchardCore.Media;
@@ -80,6 +81,18 @@ namespace Etch.OrchardCore.Blocks.EditorJS.Parsers
                 MediaFileStore = _mediaFileStore,
                 ShapeFactory = _shapeFactory
             }, part.Data);
+        }
+
+        public async Task<IList<dynamic>> RenderAsync(string data, ContentItem contentItem)
+        {
+            return await RenderAsync(new BlockParserContext
+            {
+                ContentItem = contentItem,
+                HttpContext = _httpContextAccessor.HttpContext,
+                LiquidTemplateManager = _liquidTemplateManager,
+                MediaFileStore = _mediaFileStore,
+                ShapeFactory = _shapeFactory
+            }, data);
         }
 
         #endregion
