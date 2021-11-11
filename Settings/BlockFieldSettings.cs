@@ -3,5 +3,7 @@
     public class BlockFieldSettings
     {
         public string[] LinkableContentTypes { get; set; } = new string[0];
+
+        public string Placeholder { get; set; }
     }
 }

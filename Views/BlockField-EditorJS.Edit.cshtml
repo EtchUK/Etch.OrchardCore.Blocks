@@ -1,4 +1,5 @@
-﻿@using OrchardCore.ContentManagement.Metadata.Models
+﻿@using Etch.OrchardCore.Blocks.Settings
+@using OrchardCore.ContentManagement.Metadata.Models
 
 @model Etch.OrchardCore.Blocks.ViewModels.EditBlockFieldViewModel
 
@@ -10,6 +11,8 @@
     var partName = Model.PartFieldDefinition.PartDefinition.Name;
     var fieldName = Model.PartFieldDefinition.Name;
     var tenantPath = Context.Request.PathBase.ToString();
+
+    var settings = Model.PartFieldDefinition.GetSettings<BlockFieldSettings>();
 }
 
 @if (isEditorJSEnabled)
@@ -25,12 +28,12 @@
 
     <script at="Foot">
         initializeMediaApplication(false, '@Url.Action("MediaApplication", "Admin", new { area = "OrchardCore.Media" })');
-        initializeEditorJS('@tenantPath', '@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)', '', '@partName', '@fieldName');
+        initializeEditorJS('@tenantPath', '@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)', '', '@partName', '@fieldName', '@settings.Placeholder');
     </script>
 
     <div class="form-group">
         <h5>@Model.PartFieldDefinition.DisplayName()</h5>
-        <div id="@Html.IdFor(m => m)"></div>
+        <div id="@Html.IdFor(m => m)" data-placeholder></div>
         @Html.HiddenFor(m => m.Data)
     </div>
 
