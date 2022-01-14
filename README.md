@@ -8,7 +8,7 @@ Orchard Core module providing WYSIWYG editor via [Editor.js](https://editorjs.io
 
 ## Orchard Core Reference
 
-This module is referencing a stable build of Orchard Core ([`1.1.0`](https://www.nuget.org/packages/OrchardCore.Module.Targets/1.1.0)).
+This module is referencing a stable build of Orchard Core ([`1.2.1`](https://www.nuget.org/packages/OrchardCore.Module.Targets/1.2.1)).
 
 ## Installing
 
