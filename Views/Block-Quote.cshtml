@@ -1,12 +1,23 @@
 ﻿@{ 
-    var cssClass = Model.Alignment == "center" ? "blockquote blockquote--centered" : "blockquote";
+    var cssClasses = "styled-quote";
+    if (Model.Alignment == "center")
+    {
+        cssClasses += " text--align-center";
+    } 
 }
 
-<blockquote class="@cssClass">
-    <p>@Html.Raw(Model.Text)</p>
+@* Per the spec, blockquote should only contain direct quote content *@
+@* https://www.w3.org/TR/html5-author/the-blockquote-element.html *@
+
+<figure class="@cssClasses">
+    <blockquote class="styled-quote__copy">
+        <p>@Html.Raw(Model.Text)</p>
+    </blockquote>
 
     @if (Model.HasCaption)
     {
-        <footer>@Html.Raw(Model.Caption)</footer>
+        <figcaption class="styled-quote__source">
+            @Html.Raw(Model.Caption)
+        </figcaption>
     }
-</blockquote>
+</figure>
