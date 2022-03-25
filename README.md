@@ -8,7 +8,7 @@ Orchard Core module providing WYSIWYG editor via [Editor.js](https://editorjs.io
 
 ## Orchard Core Reference
 
-This module is referencing a stable build of Orchard Core ([`1.1.0`](https://www.nuget.org/packages/OrchardCore.Module.Targets/1.1.0)).
+This module is referencing a stable build of Orchard Core ([`1.3.0`](https://www.nuget.org/packages/OrchardCore.Module.Targets/1.3.0)).
 
 ## Installing
 
@@ -18,6 +18,6 @@ Alternatively, [download the source](https://github.com/etchuk/Etch.OrchardCore.
 
 ## Usage
 
-Enable the "Blocks" feature, which will add a new "Block Body" part and a "Block Field" content field. Both the part & field will allow content editors to use a block editor driven by [Editor.js](https://editorjs.io/). 
+Enable the "Blocks" feature, which will add a new "Block Body" part and a "Block Field" content field. Both the part & field will allow content editors to use a block editor driven by [Editor.js](https://editorjs.io/).
 
 Each block is represented by a shape whose template can be overridden in a custom module/theme. For example, the pargraph block is represented by a shape named `Block__Paragraph` that can be overridden with a template named `Block-Paragraph`.
