@@ -129,7 +129,8 @@ export default class MediaLibraryTool {
 
         $(selectors.mediaApp).show();
 
-        const modal = $(this.modalBodyElement).modal();
+        const modal = new bootstrap.Modal(this.modalBodyElement);
+        modal.show();
 
         $(this.modalBodyElement)
             .find(selectors.mediaFieldSelectButton)
@@ -141,7 +142,7 @@ export default class MediaLibraryTool {
 
                 window.mediaApp.selectedMedias = [];
 
-                modal.modal('hide');
+                modal.hide();
                 return true;
             });
     }
