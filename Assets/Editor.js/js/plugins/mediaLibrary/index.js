@@ -1,4 +1,4 @@
-import 'bootstrap';
+import bootstrap from 'bootstrap';
 import $ from 'jquery';
 
 import Ui from './ui';
@@ -129,7 +129,8 @@ export default class MediaLibraryTool {
 
         $(selectors.mediaApp).show();
 
-        const modal = $(this.modalBodyElement).modal();
+        const modal = new bootstrap.Modal($(this.modalBodyElement)[0]);     
+        modal.show();
 
         $(this.modalBodyElement)
             .find(selectors.mediaFieldSelectButton)
@@ -141,7 +142,7 @@ export default class MediaLibraryTool {
 
                 window.mediaApp.selectedMedias = [];
 
-                modal.modal('hide');
+                modal.hide();
                 return true;
             });
     }

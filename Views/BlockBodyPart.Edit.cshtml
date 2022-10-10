@@ -27,7 +27,7 @@
         initializeEditorJS('@tenantPath', '@Html.IdFor(m => m)', '@Html.IdFor(m => m.Data)', '@typeName', '@partName', '', '@settings.Placeholder');
     </script>
 
-    <div class="form-group">
+    <div class="mb-3">
         <div id="@Html.IdFor(m => m)"></div>
         @Html.HiddenFor(m => m.Data)
     </div>
@@ -37,14 +37,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">@T["Select Media"]</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary mediaFieldSelectButton">@T["OK"]</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@T["Cancel"]</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@T["Cancel"]</button>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
 }
 else
 {
-    <div class="form-group">
+    <div class="mb-3">
         <textarea asp-for="Data" rows="5" class="form-control content-preview-text"></textarea>
     </div>
 }
