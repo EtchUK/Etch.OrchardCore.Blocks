@@ -1,6 +1,6 @@
 {
     "name": "etch.orchardcore.blocks",
-    "version": "1.5.1",
+    "version": "1.5.2",
     "description": "Orchard Core module providing WYSIWYG editor via Editor.js.",
     "scripts": {
         "build": "webpack",
