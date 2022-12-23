@@ -17,6 +17,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove=".gitignore" />
+    <EmbeddedResource Remove=".prettierrc" />
+    <EmbeddedResource Remove="azure-pipelines.yml" />
+    <EmbeddedResource Remove="nuget.config" />
+    <EmbeddedResource Remove="LICENSE.md" />
+    <EmbeddedResource Remove="package.json" />
+    <EmbeddedResource Remove="package-lock.json" />
+    <EmbeddedResource Remove="README.md" />
+    <EmbeddedResource Remove="webpack.config.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="OrchardCore.Admin" Version="1.4.0" />
     <PackageReference Include="OrchardCore.Autoroute" Version="1.4.0" />
     <PackageReference Include="OrchardCore.ContentManagement" Version="1.4.0" />
