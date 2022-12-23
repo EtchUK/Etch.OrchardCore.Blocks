@@ -4,7 +4,7 @@ Orchard Core module providing WYSIWYG editor via [Editor.js](https://editorjs.io
 
 ## Build Status
 
-[![Build Status](https://secure.travis-ci.org/etchuk/Etch.OrchardCore.Blocks.png?branch=master)](http://travis-ci.org/etchuk/Etch.OrchardCore.Blocks) [![NuGet](https://img.shields.io/nuget/v/Etch.OrchardCore.Blocks.svg)](https://www.nuget.org/packages/Etch.OrchardCore.Blocks)
+[![NuGet](https://img.shields.io/nuget/v/Etch.OrchardCore.Blocks.svg)](https://www.nuget.org/packages/Etch.OrchardCore.Blocks)
 
 ## Orchard Core Reference
 
