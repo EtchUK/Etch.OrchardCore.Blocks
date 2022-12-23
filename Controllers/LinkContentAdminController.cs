@@ -77,7 +77,7 @@ namespace Etch.OrchardCore.Blocks.Controllers
                 throw new Exception("Unable to find part definition");
             }
 
-            return contentTypePartDefinition.Settings.ToObject<BlockBodyPartSettings>()?.LinkableContentTypes ?? new string[0];
+            return contentTypePartDefinition.GetSettings<BlockBodyPartSettings>()?.LinkableContentTypes ?? new string[0];
         }
 
         private string[] GetLinkableTypesFromFieldDefinition(string part, string field)
