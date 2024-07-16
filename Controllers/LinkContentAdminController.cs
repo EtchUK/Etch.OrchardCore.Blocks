@@ -33,6 +33,11 @@ namespace Etch.OrchardCore.Blocks.Controllers
 
         public async Task<IActionResult> SearchContentItems(string part, string field, string query)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (string.IsNullOrWhiteSpace(part))
             {
                 return BadRequest("Part is required parameter");
