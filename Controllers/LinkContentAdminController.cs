@@ -75,8 +75,8 @@ namespace Etch.OrchardCore.Blocks.Controllers
 
         private async Task<string[]> GetLinkableTypesFromFieldDefinitionAsync(string part, string field)
         {
-            var pd = await _contentDefinitionManager.GetPartDefinitionAsync(part);
-            var partFieldDefinition = pd?.Fields
+            var partDefinition = await _contentDefinitionManager.GetPartDefinitionAsync(part);
+            var partFieldDefinition = partDefinition?.Fields
                .FirstOrDefault(f => f.Name == field);
 
             var fieldSettings = partFieldDefinition?.GetSettings<BlockFieldSettings>();
