@@ -31,7 +31,7 @@ namespace Etch.OrchardCore.Blocks.Controllers
 
         #region Actions
 
-        public async Task<IActionResult> SearchContentItems(string type, string part, string field, string query)
+        public async Task<IActionResult> SearchContentItems(string part, string field, string query)
         {
             if (string.IsNullOrWhiteSpace(part))
             {
@@ -40,7 +40,7 @@ namespace Etch.OrchardCore.Blocks.Controllers
 
             try
             {
-                var linkableTypes = await GetLinkableTypesAsync(type, part, field);
+                var linkableTypes = await GetLinkableTypesAsync(part, field);
                 return new ObjectResult(await _contentSearchResultsProvider.SearchAsync(new ContentSearchContext
                 {
                     ContentTypes = linkableTypes,
@@ -57,7 +57,7 @@ namespace Etch.OrchardCore.Blocks.Controllers
 
         #region Private Methods
 
-        private async Task<string[]> GetLinkableTypesAsync(string type, string part, string field)
+        private async Task<string[]> GetLinkableTypesAsync(string part, string field)
         {
             var linkableTypes = await GetLinkableTypesFromFieldDefinitionAsync(part, field);
             if (!string.IsNullOrEmpty(field))
@@ -66,20 +66,6 @@ namespace Etch.OrchardCore.Blocks.Controllers
             }
 
             return linkableTypes;
-        }
-
-        private async Task<string[]> GetLinkableTypesFromPartDefinition(string type, string part)
-        {
-            var typeDefinition = await _contentDefinitionManager.GetTypeDefinitionAsync(type);
-
-            var contentTypePartDefinition = typeDefinition.Parts.FirstOrDefault(p => p.Name == part);
-
-            if (contentTypePartDefinition == null)
-            {
-                throw new Exception("Unable to find part definition");
-            }
-
-            return contentTypePartDefinition.GetSettings<BlockBodyPartSettings>()?.LinkableContentTypes ?? Array.Empty<string>();
         }
 
         private async Task<string[]> GetLinkableTypesFromFieldDefinitionAsync(string part, string field)
