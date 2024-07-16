@@ -40,9 +40,10 @@ namespace Etch.OrchardCore.Blocks.Controllers
 
             try
             {
+                var linkableTypes = await GetLinkableTypesAsync(type, part, field);
                 return new ObjectResult(await _contentSearchResultsProvider.SearchAsync(new ContentSearchContext
                 {
-                    ContentTypes = GetLinkableTypes(type, part, field),
+                    ContentTypes = linkableTypes,
                     Query = query
                 }));
             } 
@@ -56,19 +57,20 @@ namespace Etch.OrchardCore.Blocks.Controllers
 
         #region Private Methods
 
-        private string[] GetLinkableTypes(string type, string part, string field)
+        private async Task<string[]> GetLinkableTypesAsync(string type, string part, string field)
         {
+            var linkableTypes = await GetLinkableTypesFromFieldDefinitionAsync(part, field);
             if (!string.IsNullOrEmpty(field))
-            {
-                return GetLinkableTypesFromFieldDefinition(part, field);
+            {                
+                return linkableTypes;
             }
 
-            return GetLinkableTypesFromPartDefinition(type, part);
+            return linkableTypes;
         }
 
-        private string[] GetLinkableTypesFromPartDefinition(string type, string part)
+        private async Task<string[]> GetLinkableTypesFromPartDefinition(string type, string part)
         {
-            var typeDefinition = _contentDefinitionManager.GetTypeDefinition(type);
+            var typeDefinition = await _contentDefinitionManager.GetTypeDefinitionAsync(type);
 
             var contentTypePartDefinition = typeDefinition.Parts.FirstOrDefault(p => p.Name == part);
 
@@ -80,9 +82,10 @@ namespace Etch.OrchardCore.Blocks.Controllers
             return contentTypePartDefinition.GetSettings<BlockBodyPartSettings>()?.LinkableContentTypes ?? Array.Empty<string>();
         }
 
-        private string[] GetLinkableTypesFromFieldDefinition(string part, string field)
+        private async Task<string[]> GetLinkableTypesFromFieldDefinitionAsync(string part, string field)
         {
-            var partFieldDefinition = _contentDefinitionManager.GetPartDefinition(part)?.Fields
+            var pd = await _contentDefinitionManager.GetPartDefinitionAsync(part);
+            var partFieldDefinition = pd?.Fields
                .FirstOrDefault(f => f.Name == field);
 
             var fieldSettings = partFieldDefinition?.GetSettings<BlockFieldSettings>();

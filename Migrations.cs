@@ -1,6 +1,7 @@
 ﻿using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.Data.Migration;
+using System.Threading.Tasks;
 
 namespace Etch.OrchardCore.Blocks
 {
@@ -23,9 +24,9 @@ namespace Etch.OrchardCore.Blocks
 
         #region Migrations
 
-        public int Create()
+        public async Task<int> CreateAsync()
         {
-            _contentDefinitionManager.AlterPartDefinition("BlockBodyPart", builder => builder
+            await _contentDefinitionManager.AlterPartDefinitionAsync("BlockBodyPart", builder => builder
                 .Attachable()
                 .Reusable()
                 .WithDisplayName("Block Body")
